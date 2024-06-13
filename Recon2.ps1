@@ -205,8 +205,6 @@ namespace CredEnum {
             return cred;
         }
 
-
-
         public Credential[] GetCredentials(int count)
         {
             if (IsInvalid)
@@ -266,7 +264,6 @@ namespace CredEnum {
                 CriticalCredentialHandle CredHandle = new CriticalCredentialHandle(pCredentials);
                 Credential[] Credentials = new Credential[count];
                 
-
                 Credentials = CredHandle.GetCredentials(count);
 
                 for (int inx = 0; inx < count; inx++)
@@ -323,14 +320,12 @@ namespace CredEnum {
                 $ServiceName = "FTP"    
                 $includethis = $True       
             }
-            elseif ( ($HostName -match "domain:target=(.*)") ) #-or ($HostName -match "legacygeneric:target=(.*)")) {
-            {    
+            elseif ( ($HostName -match "domain:target=(.*)") ) {
                 $HostName = $matches[1]   
                 $ServiceName = "SMB"       
                 $includethis = $True           
             }
-            elseif ( ($HostName -match "microsoftoffice(.*)") ) #-or ($HostName -match "legacygeneric:target=(.*)")) {
-            {
+            elseif ( ($HostName -match "microsoftoffice(.*)") ) {
                 $ServiceName = "Outlook"                     
                 $includethis = $True           
             }
@@ -364,7 +359,7 @@ namespace CredEnum {
                 $obj = New-Object PSObject                
                 Add-Member -inputObject $obj -memberType NoteProperty -name "Username" -value "$($credentry.UserName)"
                 Add-Member -inputObject $obj -memberType NoteProperty -name "Domain" -value "$DomainName"
-                Add-Member -inputObject $obj -memberType NoteProperty -name "Hostname" -value "$HostName" # need to be sanitised
+                Add-Member -inputObject $obj -memberType NoteProperty -name "Hostname" -value "$HostName"
                 Add-Member -inputObject $obj -memberType NoteProperty -name "Password" -value "$Password"
                 $CRED_MANAGER_CREDS_LST += $obj 
             }
